@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table">
+  {% for bot in bots %}
+  <tr>
+    <td>{{ bot["name"] }}</td>
+    <td>{{ bot["rank"] }}</td>
+    <td>{{ bot["karma"] }}</td>
+    <td>{{ bot["replies"] }}</td>
+    <td>{{ bot["read_time"] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
