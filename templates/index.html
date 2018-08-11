@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <table class="table">
+  <tr>
+    <th><a href="/?sort=name">Name</a></th>
+    <th><a href="/?sort=rank">Rank</a></th>
+    <th><a href="/?sort=karma">Karma</a></th>
+    <th><a href="/?sort=replies">Replies</a></th>
+    <th><a href="/?sort=read_time">Read Time</a></th>
+  </tr>
   {% for bot in bots %}
   <tr>
     <td>{{ bot["name"] }}</td>
