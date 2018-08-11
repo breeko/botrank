@@ -1,5 +1,5 @@
 import csv
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def read_csv(filename="bots.csv"):
@@ -22,5 +22,17 @@ def read_csv(filename="bots.csv"):
 @app.route("/", methods=['GET'])
 def index():
   bots = read_csv()
-  bots = sorted(bots, key=lambda k: k["rank"]) 
+
+  cols = [ "name", "rank", "karma", "replies", "read_time" ]
+  sort = request.args.get("sort")
+
+  if sort in cols:
+    if sort == "rank" or sort == "name":
+      reverse = False
+    else:
+      reverse = True
+    bots = sorted(bots, key=lambda k: k[sort], reverse=reverse)
+  else:
+    bots = sorted(bots, key=lambda k: k["rank"], reverse=False)
+
   return render_template("index.html", bots=bots)
