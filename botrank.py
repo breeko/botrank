@@ -7,7 +7,6 @@ def read_csv(filename="bots.csv"):
   fh = open(filename, "r")
   reader = csv.reader(fh, delimiter=",")
   for row in reader:
-    print (row)
     rank = {
       "name": row[0],
       "url": row[1],
