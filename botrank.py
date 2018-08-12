@@ -23,7 +23,7 @@ def index():
   order = request.args.get("order")
 
   cols = [ "rank", "name", "score", "good-votes", "bad-votes" ]
-  
+
   numeric_cols = {"rank", "rsore", "good-votes", "bad-votes"}
   reverse_cols = {"score", "good-votes", "bad-votes"}
 
