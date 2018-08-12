@@ -19,11 +19,13 @@ def read_csv(filename="bots.csv"):
 def index():
   bots = read_csv()
 
-  sort = request.args.get("sort", "Rank")
-  cols = [ "Rank", "Bot Name", "Score", "Good Bot Votes", "Bad Bot Votes" ]
+  sort = request.args.get("sort", "rank")
+  order = request.args.get("order")
+
+  cols = [ "rank", "name", "score", "good-votes", "bad-votes" ]
   
-  numeric_cols = {"Rank", "Score", "Good Bot Votes", "Bad Bot Votes"}
-  reverse_cols = {"Score", "Good Bot Votes", "Bad Bot Votes"}
+  numeric_cols = {"rank", "rsore", "good-votes", "bad-votes"}
+  reverse_cols = {"score", "good-votes", "bad-votes"}
 
   if sort in cols:
     if sort in reverse_cols:
@@ -31,6 +33,10 @@ def index():
     else:
       reverse = False
 
+    if order:
+      reverse = not reverse
+
     bots = sorted(bots, key=lambda k: float(k[sort]) if sort in numeric_cols else k[sort], reverse=reverse)
-  
-  return render_template("index.html", bots=bots)
+
+  params = {"sort": sort, "order": order}
+  return render_template("index.html", bots=bots, params=params)

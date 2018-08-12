@@ -2,19 +2,34 @@
 {% block content %}
 <table class="table">
   <tr>
-    <th><a href="/?sort=Rank">Rank</a></th>
-    <th><a href="/?sort=Bot+Name">Bot Name</a></th>
-    <th><a href="/?sort=Score">Score</a></th>
-    <th><a href="/?sort=Good+Bot+Votes">Good Bot Votes</a></th>
-    <th><a href="/?sort=Bad+Bot+Votes">Bad Bot Votes</a></th>
+    <th><a href="/?sort=rank{%
+      if params['sort'] == 'rank' and not params['order']
+        %}&order=reverse{%
+        endif %}">Rank</a></th>
+    <th><a href="/?sort=name{%
+      if params['sort'] == 'name' and not params['order']
+        %}&order=reverse{%
+      endif %}">Bot Name</a></th>
+    <th><a href="/?sort=score{%
+      if params['sort'] == 'score' and not params['order']
+        %}&order=reverse{%
+      endif %}">Score</a></th>
+    <th><a href="/?sort=good-votes{%
+      if params['sort'] == 'good-votes' and not params['order']
+        %}&order=reverse{%
+      endif %}">Good Bot Votes</a></th>
+    <th><a href="/?sort=bad-votes{%
+      if params['sort'] == 'bad-votes' and not params['order']
+        %}&order=reverse{%
+      endif %}">Bad Bot Votes</a></th>
   </tr>
   {% for bot in bots %}
   <tr>
-    <td>{{ bot["Rank"] }}</td>
-    <td><a href= {{ "https://www.reddit.com/user/{}".format(bot["Bot Name"]) }}>{{ bot["Bot Name"] }}</a></td>
-    <td>{{ bot["Score"] }}</td>
-    <td>{{ bot["Good Bot Votes"] }}</td>
-    <td>{{ bot["Bad Bot Votes"] }}</td>
+    <td>{{ bot["rank"] }}</td>
+    <td><a href= {{ "https://www.reddit.com/user/{}".format(bot["name"]) }}>{{ bot["name"] }}</a></td>
+    <td>{{ bot["score"] }}</td>
+    <td>{{ bot["good-votes"] }}</td>
+    <td>{{ bot["bad-votes"] }}</td>
   </tr>
   {% endfor %}
 </table>
