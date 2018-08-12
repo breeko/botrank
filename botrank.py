@@ -6,15 +6,11 @@ def read_csv(filename="bots.csv"):
   rt = []
   fh = open(filename, "r")
   reader = csv.reader(fh, delimiter=",")
+  clean = lambda c: c.encode('ascii',errors='ignore').decode()
+  headers = next(reader)
+  clean_headers = [clean(h) for h in headers]
   for row in reader:
-    rank = {
-      "name": row[0],
-      "url": row[1],
-      "rank": row[2],
-      "karma": row[3],
-      "replies": row[4],
-      "read_time": row[5]
-    }
+    rank = { col:row[idx] for idx, col in enumerate(clean_headers) }
     rt.append(rank)
 
   return rt
@@ -23,16 +19,18 @@ def read_csv(filename="bots.csv"):
 def index():
   bots = read_csv()
 
-  cols = [ "name", "rank", "karma", "replies", "read_time" ]
-  sort = request.args.get("sort")
+  sort = request.args.get("sort", "Rank")
+  cols = [ "Rank", "Bot Name", "Score", "Good Bot Votes", "Bad Bot Votes" ]
+  
+  numeric_cols = {"Rank", "Score", "Good Bot Votes", "Bad Bot Votes"}
+  reverse_cols = {"Score", "Good Bot Votes", "Bad Bot Votes"}
 
   if sort in cols:
-    if sort == "rank" or sort == "name":
-      reverse = False
-    else:
+    if sort in reverse_cols:
       reverse = True
-    bots = sorted(bots, key=lambda k: k[sort], reverse=reverse)
-  else:
-    bots = sorted(bots, key=lambda k: k["rank"], reverse=False)
+    else:
+      reverse = False
 
+    bots = sorted(bots, key=lambda k: float(k[sort]) if sort in numeric_cols else k[sort], reverse=reverse)
+  
   return render_template("index.html", bots=bots)

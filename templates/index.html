@@ -2,19 +2,19 @@
 {% block content %}
 <table class="table">
   <tr>
-    <th><a href="/?sort=name">Name</a></th>
-    <th><a href="/?sort=rank">Rank</a></th>
-    <th><a href="/?sort=karma">Karma</a></th>
-    <th><a href="/?sort=replies">Replies</a></th>
-    <th><a href="/?sort=read_time">Read Time</a></th>
+    <th><a href="/?sort=Rank">Rank</a></th>
+    <th><a href="/?sort=Bot+Name">Bot Name</a></th>
+    <th><a href="/?sort=Score">Score</a></th>
+    <th><a href="/?sort=Good+Bot+Votes">Good Bot Votes</a></th>
+    <th><a href="/?sort=Bad+Bot+Votes">Bad Bot Votes</a></th>
   </tr>
   {% for bot in bots %}
   <tr>
-    <td>{{ bot["name"] }}</td>
-    <td>{{ bot["rank"] }}</td>
-    <td>{{ bot["karma"] }}</td>
-    <td>{{ bot["replies"] }}</td>
-    <td>{{ bot["read_time"] }}</td>
+    <td>{{ bot["Rank"] }}</td>
+    <td><a href= {{ "https://www.reddit.com/user/{}".format(bot["Bot Name"]) }}>{{ bot["Bot Name"] }}</a></td>
+    <td>{{ bot["Score"] }}</td>
+    <td>{{ bot["Good Bot Votes"] }}</td>
+    <td>{{ bot["Bad Bot Votes"] }}</td>
   </tr>
   {% endfor %}
 </table>
