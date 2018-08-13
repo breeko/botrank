@@ -24,7 +24,7 @@ def index():
 
   cols = [ "rank", "name", "score", "good-votes", "bad-votes" ]
 
-  numeric_cols = {"rank", "rsore", "good-votes", "bad-votes"}
+  numeric_cols = {"rank", "score", "good-votes", "bad-votes"}
   reverse_cols = {"score", "good-votes", "bad-votes"}
 
   if sort in cols:
