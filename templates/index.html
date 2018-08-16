@@ -2,51 +2,55 @@
 {% block content %}
 <table class="table">
   <tr>
-    <th><a href="/?sort=rank{%
+    <th>{%
+      if params['sort'] == 'rank' and not params['order'] %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div>
+      {% elif params['sort'] == 'rank' %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div>{%
+      endif %}
+      <a href="/?sort=rank{%
       if params['sort'] == 'rank' and not params['order']
         %}&order=reverse{%
-        endif %}">Rank</a>{%
-      if params['sort'] == 'rank' and not params['order'] %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div></th>
-      {% elif params['sort'] == 'rank' %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div></th>{%
+        endif %}">Rank</a></th>
+    <th>{%
+      if params['sort'] == 'name' and not params['order'] %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div>
+      {% elif params['sort'] == 'name' %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div>{%
       endif %}
-    <th><a href="/?sort=name{%
+      <a href="/?sort=name{%
       if params['sort'] == 'name' and not params['order']
         %}&order=reverse{%
-      endif %}">Bot Name</a>{%
-      if params['sort'] == 'name' and not params['order'] %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div></th>
-      {% elif params['sort'] == 'name' %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div></th>{%
+      endif %}">Bot Name</a></th>
+    <th>{%
+      if params['sort'] == 'score' and not params['order'] %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div>
+      {% elif params['sort'] == 'score' %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div>{%
       endif %}
-    <th><a href="/?sort=score{%
+      <a href="/?sort=score{%
       if params['sort'] == 'score' and not params['order']
         %}&order=reverse{%
-      endif %}">Score</a>{%
-      if params['sort'] == 'score' and not params['order'] %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div></th>
-      {% elif params['sort'] == 'score' %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div></th>{%
-      endif %}
-    <th><a href="/?sort=good-votes{%
+      endif %}">Score</a></th>
+    <th>{%
+      if params['sort'] == 'good-votes' and not params['order'] %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div>
+      {% elif params['sort'] == 'good-votes' %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div>{%
+      endif %}<a href="/?sort=good-votes{%
       if params['sort'] == 'good-votes' and not params['order']
         %}&order=reverse{%
-      endif %}">Good Bot Votes</a>{%
-      if params['sort'] == 'good-votes' and not params['order'] %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div></th>
-      {% elif params['sort'] == 'good-votes' %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div></th>{%
+      endif %}">Good Bot Votes</a></th>
+    <th>{%
+      if params['sort'] == 'bad-votes' and not params['order'] %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div>
+      {% elif params['sort'] == 'bad-votes' %}
+        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div>{%
       endif %}
-    <th><a href="/?sort=bad-votes{%
+      <a href="/?sort=bad-votes{%
       if params['sort'] == 'bad-votes' and not params['order']
         %}&order=reverse{%
-      endif %}">Bad Bot Votes</a>{%
-      if params['sort'] == 'bad-votes' and not params['order'] %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-down"></div></th>
-      {% elif params['sort'] == 'bad-votes' %}
-        <div style="margin: 1px" class="glyphicon glyphicon-chevron-up"></div></th>{%
-      endif %}
+      endif %}">Bad Bot Votes</a></th>
   </tr>
   {% for bot in bots %}
   <tr>
