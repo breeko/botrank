@@ -59,6 +59,12 @@
   {% endfor %}
 </table>
 <div class="text-center">
+  {{ params['total'] }} Total Bots
+</div>
+<div class="text-center">
+  Page {{ params['page'] }} of {{ params['pages'] }}
+</div>
+<div class="text-center">
 <ul class="pagination">
 {% if params['page'] > 1 %}
   <li><a href="/?sort={{ params['sort'] }}{% if params['order'] %}&order=reverse{% endif %}&page={{ params['page'] - 1}}">Prev</a></li>

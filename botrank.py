@@ -1,5 +1,7 @@
 import csv
 from flask import Flask, render_template, request
+import math
+
 app = Flask(__name__)
 
 ITEMS_PER_PAGE = 250
@@ -42,6 +44,7 @@ def index():
     reverse = not reverse
 
   total = len(bots)
+  pages = math.ceil(total / ITEMS_PER_PAGE)
   if total > int(page) * ITEMS_PER_PAGE:
     more = True
   else:
@@ -57,6 +60,13 @@ def index():
   else:
     page = 1
 
-  params = {"sort": sort, "order": order, "page": page, "total": total, "more": more}
+  params = {
+    "sort": sort,
+    "order": order,
+    "page": page,
+    "pages": pages,
+    "total": total,
+    "more": more
+  }
 
   return render_template("index.html", bots=bots, params=params)
